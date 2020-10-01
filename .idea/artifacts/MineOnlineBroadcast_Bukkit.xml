@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MineOnlineBroadcast-Bukkit">
+    <output-path>$PROJECT_DIR$/out/artifacts/MineOnlineBroadcast_Bukkit</output-path>
+    <root id="archive" name="MineOnlineBroadcast-Bukkit.jar">
+      <element id="module-output" name="MineOnlineBroadcast-Bukkit" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/json.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
