@@ -1,23 +1,14 @@
+import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerListener;
 import org.bukkit.event.player.PlayerLoginEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-
-import java.util.ArrayList;
-import java.util.logging.Logger;
 
 public class MineOnlineBroadcastListener extends PlayerListener {
-    private static ArrayList<String> PlayerList = new ArrayList();
-    boolean _DEBUG = false;
-    private Logger log;
-    private MineOnlineBroadcast plugin = null;
+    public MineOnlineBroadcastListener() {
 
-    public MineOnlineBroadcastListener(MineOnlineBroadcast parent) {
-        this.plugin = parent;
-        this.log = Logger.getLogger("Minecraft");
     }
 
-    public void onPlayerQuit(PlayerQuitEvent event) {
+    public void onPlayerQuit(PlayerEvent event) {
         MineOnlineBroadcast.lastPing = System.currentTimeMillis() - 40000;
     }
 

@@ -1,5 +1,3 @@
-import net.minecraft.server.PropertyManager;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -12,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.Properties;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -64,7 +63,7 @@ public class MineOnlineBroadcast extends JavaPlugin {
             String ip,
             String port,
             int users,
-            int maxUsers,
+            String maxUsers,
             String name,
             boolean onlineMode,
             String md5,
@@ -152,47 +151,52 @@ public class MineOnlineBroadcast extends JavaPlugin {
             public void run() {
                 while(true) {
                     if (System.currentTimeMillis() - MineOnlineBroadcast.lastPing > 45000) {
-                        lastPing = System.currentTimeMillis();
-                        PropertyManager propertiesFile = new PropertyManager(new File("server.properties"));
+                        try {
+                            lastPing = System.currentTimeMillis();
+                            Properties propertiesFile = new Properties();
+                            propertiesFile.load(new FileInputStream(new File("server.properties")));
 
-                        String ip = propertiesFile.getString("server-ip", null);
-                        String port = propertiesFile.getString("server-port", "25565");
-                        int users = Bukkit.getServer().getOnlinePlayers().length;
-                        int maxUsers = propertiesFile.getInt("max-players", 20);
-                        String name = propertiesFile.getString("server-name", "Minecraft Server");
-                        boolean onlineMode = true; // Assume Authme is in use for now.
-                        String md5 = propertiesFile.getString("version-md5", "");
-                        boolean whitelisted = propertiesFile.getBoolean("whitelist", false);
-                        String[] whitelistUsers = new String[0];
+                            String ip = propertiesFile.getProperty("server-ip", null);
+                            String port = propertiesFile.getProperty("server-port", "25565");
+                            int users = getServer().getOnlinePlayers().length;
+                            String maxUsers = propertiesFile.getProperty("max-players", "20");
+                            String name = propertiesFile.getProperty("server-name", "Minecraft Server");
+                            boolean onlineMode = true; // Assume Authme is in use for now.
+                            String md5 = propertiesFile.getProperty("version-md5", "");
+                            boolean whitelisted = propertiesFile.getProperty("whitelist", "false").equals("true");
+                            String[] whitelistUsers = new String[0];
 
-                        if(whitelisted) {
-                            whitelistUsers = readUsersFile("white-list.txt");
+                            if (whitelisted) {
+                                whitelistUsers = readUsersFile("white-list.txt");
+                            }
+
+                            String[] bannedUsers = readUsersFile("banned-players.txt");
+                            String[] bannedIPs = readUsersFile("banned-ips.txt");
+
+                            String owner = null;
+                            String[] playerNames = Arrays.stream(getServer().getOnlinePlayers()).map(Player::getName).collect(Collectors.toList()).toArray(new String[users]);
+
+                            listServer(
+                                    ip,
+                                    port,
+                                    users,
+                                    maxUsers,
+                                    name,
+                                    onlineMode,
+                                    md5,
+                                    whitelisted,
+                                    whitelistUsers,
+                                    new String[0],
+                                    new String[0],
+                                    bannedUsers,
+                                    bannedIPs,
+                                    new String[0],
+                                    owner,
+                                    playerNames
+                            );
+                        } catch (IOException ex) {
+                            // ignore.
                         }
-
-                        String[] bannedUsers = readUsersFile("banned-players.txt");
-                        String[] bannedIPs = readUsersFile("banned-ips.txt");
-
-                        String owner = null;
-                        String[] playerNames = Arrays.stream(Bukkit.getServer().getOnlinePlayers()).map(Player::getName).collect(Collectors.toList()).toArray(new String[users]);
-
-                        listServer(
-                                ip,
-                                port,
-                                users,
-                                maxUsers,
-                                name,
-                                onlineMode,
-                                md5,
-                                whitelisted,
-                                whitelistUsers,
-                                new String[0],
-                                new String[0],
-                                bannedUsers,
-                                bannedIPs,
-                                new String[0],
-                                owner,
-                                playerNames
-                        );
                     }
                 }
             }
@@ -203,7 +207,7 @@ public class MineOnlineBroadcast extends JavaPlugin {
 
     public void initialize() {
         this.log = Logger.getLogger("Minecraft");
-        this.listener = new MineOnlineBroadcastListener(this);
+        this.listener = new MineOnlineBroadcastListener();
         this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_LOGIN, this.listener, Event.Priority.Lowest, this);
         this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_QUIT, this.listener, Event.Priority.Highest, this);
         this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_KICK, this.listener, Event.Priority.Highest, this);
