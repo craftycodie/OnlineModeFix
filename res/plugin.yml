@@ -1,9 +1,9 @@
 name: MineOnlineBroadcast
-version: 1.0.1
+version: 1.0.2
 description: Lists a server on mineonline.codie.gg/servers
 author: codieradical
 authors: [Codie]
-website: http://mineonline.codie.gg/
+website: https://mineonline.codie.gg/
 
 main: MineOnlineBroadcast
 database: false
