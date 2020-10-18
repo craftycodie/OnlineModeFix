@@ -9,7 +9,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.Properties;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -19,27 +18,6 @@ public class MineOnlineBroadcast extends JavaPlugin {
     public static long lastPing;
     MineOnlineBroadcastListener listener;
     Logger log;
-
-    public static String[] readUsersFile(String path) {
-        try {
-            File usersFile = new File(path);
-            if (usersFile.exists()) {
-                LinkedList list = new LinkedList();
-                BufferedReader reader = new BufferedReader(new FileReader(usersFile));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    list.add(line);
-                }
-                reader.close();
-
-                return (String[])list.toArray(new String[0]);
-            }
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return new String[0];
-    }
 
     public static byte[] createChecksum(String filename) throws Exception {
         InputStream fis =  new FileInputStream(filename);
@@ -68,13 +46,6 @@ public class MineOnlineBroadcast extends JavaPlugin {
             boolean onlineMode,
             String md5,
             boolean whitelisted,
-            String[] whitelistUsers,
-            String[] whitelistIPs,
-            String[] whitelistUUIDs,
-            String[] bannedUsers,
-            String[] bannedIPs,
-            String[] bannedUUIDs,
-            String owner,
             String[] playerNames
     ) {
         HttpURLConnection connection = null;
@@ -91,14 +62,6 @@ public class MineOnlineBroadcast extends JavaPlugin {
             jsonObject.put("onlinemode", onlineMode);
             jsonObject.put("md5", md5);
             jsonObject.put("whitelisted", whitelisted);
-            jsonObject.put("whitelistUsers", whitelistUsers);
-            jsonObject.put("whitelistIPs", whitelistIPs);
-            jsonObject.put("whitelistUUIDs", whitelistUUIDs);
-            jsonObject.put("bannedUsers", bannedUsers);
-            jsonObject.put("bannedIPs", bannedIPs);
-            jsonObject.put("bannedUUIDs", bannedUUIDs);
-            if(owner != null)
-                jsonObject.put("owner", owner);
             jsonObject.put("players", playerNames);
 
             String json = jsonObject.toString();
@@ -164,16 +127,7 @@ public class MineOnlineBroadcast extends JavaPlugin {
                             boolean onlineMode = propertiesFile.getProperty("online-mode", "true").equals("true");
                             String md5 = propertiesFile.getProperty("version-md5", "");
                             boolean whitelisted = propertiesFile.getProperty("whitelist", "false").equals("true");
-                            String[] whitelistUsers = new String[0];
 
-                            if (whitelisted) {
-                                whitelistUsers = readUsersFile("white-list.txt");
-                            }
-
-                            String[] bannedUsers = readUsersFile("banned-players.txt");
-                            String[] bannedIPs = readUsersFile("banned-ips.txt");
-
-                            String owner = null;
                             String[] playerNames = Arrays.stream(getServer().getOnlinePlayers()).map(Player::getName).collect(Collectors.toList()).toArray(new String[users]);
 
                             listServer(
@@ -185,13 +139,6 @@ public class MineOnlineBroadcast extends JavaPlugin {
                                     onlineMode,
                                     md5,
                                     whitelisted,
-                                    whitelistUsers,
-                                    new String[0],
-                                    new String[0],
-                                    bannedUsers,
-                                    bannedIPs,
-                                    new String[0],
-                                    owner,
                                     playerNames
                             );
                         } catch (IOException ex) {
