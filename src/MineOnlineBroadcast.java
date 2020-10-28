@@ -1,11 +1,13 @@
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.json.JSONObject;
 
 import java.io.*;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Arrays;
@@ -37,7 +39,7 @@ public class MineOnlineBroadcast extends JavaPlugin {
         return complete.digest();
     }
 
-    public static String listServer(
+    public static void listServer(
             String ip,
             String port,
             int users,
@@ -51,20 +53,28 @@ public class MineOnlineBroadcast extends JavaPlugin {
         HttpURLConnection connection = null;
 
         try {
-            JSONObject jsonObject = new JSONObject();
-            if (ip != null)
-                jsonObject.put("ip", ip);
-            jsonObject.put("port", port);
-            if (users > -1)
-                jsonObject.put("users", users);
-            jsonObject.put("max", maxUsers);
-            jsonObject.put("name", name);
-            jsonObject.put("onlinemode", onlineMode);
-            jsonObject.put("md5", md5);
-            jsonObject.put("whitelisted", whitelisted);
-            jsonObject.put("players", playerNames);
+            URLClassLoader classLoader = new URLClassLoader(new URL[] { MineOnlineBroadcast.class.getProtectionDomain().getCodeSource().getLocation() });
 
-            String json = jsonObject.toString();
+            Class jsonObjectClass = classLoader.loadClass("org.json.JSONObject");
+
+            Constructor jsonObjectConstructor = jsonObjectClass.getConstructor();
+            Method jsonObjectPut = jsonObjectClass.getMethod("put", String.class, Object.class);
+            Method jsonObjectToString = jsonObjectClass.getMethod("toString");
+
+            Object jsonObject = jsonObjectConstructor.newInstance();
+            if (ip != null)
+                jsonObjectPut.invoke(jsonObject, "ip", ip);
+            jsonObjectPut.invoke(jsonObject, "port", port);
+            if (users > -1)
+                jsonObjectPut.invoke(jsonObject, "users", users);
+            jsonObjectPut.invoke(jsonObject, "max", maxUsers);
+            jsonObjectPut.invoke(jsonObject, "name", name);
+            jsonObjectPut.invoke(jsonObject, "onlinemode", onlineMode);
+            jsonObjectPut.invoke(jsonObject, "md5", md5);
+            jsonObjectPut.invoke(jsonObject, "whitelisted", whitelisted);
+            jsonObjectPut.invoke(jsonObject, "players", playerNames);
+
+            String json = (String)jsonObjectToString.invoke(jsonObject);
 
             URL url = new URL("https://mineonline.codie.gg/api/servers");
             connection = (HttpURLConnection) url.openConnection();
@@ -87,15 +97,9 @@ public class MineOnlineBroadcast extends JavaPlugin {
                 response.append('\r');
             }
             rd.close();
-
-            JSONObject resObject = new JSONObject(response.toString());
-            return resObject.has("uuid") ? resObject.getString("uuid") : null;
         } catch (Exception e) {
-
             e.printStackTrace();
-            return null;
         } finally {
-
             if (connection != null)
                 connection.disconnect();
         }
