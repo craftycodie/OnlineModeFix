@@ -42,7 +42,7 @@ public class ProxyThread implements Runnable {
         Socket clientSocket = null;
 
         // DEBUG
-        System.out.println(serverSocket.get().getInetAddress() + ":" + serverSocket.get().getLocalPort());
+//        System.out.println(serverSocket.get().getInetAddress() + ":" + serverSocket.get().getLocalPort());
 
         while (running.get()) {
             //Stream to put data to the browser
@@ -86,12 +86,12 @@ public class ProxyThread implements Runnable {
                 int headerSize = requestString.split("\r\n\r\n")[0].length() + 4;
 
                 // DEBUG
-                System.out.println("Request");
+//                System.out.println("Request");
                 requestHeaders = requestString.split("\r\n\r\n")[0];
 
 
                 // DEBUG
-                System.out.println(requestString);
+//                System.out.println(requestString);
 
                 String urlString = "";
                 try {
@@ -102,9 +102,6 @@ public class ProxyThread implements Runnable {
 
                 // Fix online-mode.
                 if(urlString.contains("minecraft.net/game/checkserver.jsp?")) {
-
-                    System.out.println("here.");
-
                     String username = null;
                     String serverId = null;
                     String ip = null;
@@ -198,9 +195,9 @@ public class ProxyThread implements Runnable {
                     String contentString = new String(content);
 
                     // DEBUG
-                    System.out.println("Response");
-                    System.out.print(responseHeader);
-                    System.out.println(contentString);
+//                    System.out.println("Response");
+//                    System.out.print(responseHeader);
+//                    System.out.println(contentString);
 
                     InputStream is = connection.getInputStream();
 
