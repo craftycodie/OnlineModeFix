@@ -65,7 +65,7 @@ public class MineOnlineBroadcast extends JavaPlugin {
             String ip,
             String port,
             int users,
-            String maxUsers,
+            int maxUsers,
             String name,
             boolean onlineMode,
             String md5,
@@ -140,8 +140,8 @@ public class MineOnlineBroadcast extends JavaPlugin {
             public void run() {
                 while(true) {
                     if (System.currentTimeMillis() - MineOnlineBroadcast.lastPing > 45000) {
+                        lastPing = System.currentTimeMillis();
                         try {
-                            lastPing = System.currentTimeMillis();
                             Properties propertiesFile = new Properties();
                             propertiesFile.load(new FileInputStream(new File("server.properties")));
 
@@ -152,7 +152,7 @@ public class MineOnlineBroadcast extends JavaPlugin {
                             String ip = propertiesFile.getProperty("serverlist-ip", propertiesFile.getProperty("server-ip", propertiesFile.getProperty("ip", null)));
                             String port = propertiesFile.getProperty("serverlist-port", propertiesFile.getProperty("server-port", propertiesFile.getProperty("port", "25565")));
                             int users = getServer().getOnlinePlayers().length;
-                            String maxUsers = propertiesFile.getProperty("max-players", "20");
+                            int maxUsers = Integer.parseInt(propertiesFile.getProperty("max-players", "20"));
                             String name = propertiesFile.getProperty("server-name", "Minecraft Server");
                             boolean onlineMode = propertiesFile.getProperty("online-mode", "true").equals("true");
                             String md5 = propertiesFile.getProperty("version-md5", "");
