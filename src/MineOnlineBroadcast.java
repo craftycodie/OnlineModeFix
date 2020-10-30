@@ -1,3 +1,4 @@
+import gg.codie.mineonline.ProxyThread;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -6,6 +7,7 @@ import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
+import java.net.ServerSocket;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
@@ -20,6 +22,26 @@ public class MineOnlineBroadcast extends JavaPlugin {
     public static long lastPing;
     MineOnlineBroadcastListener listener;
     Logger log;
+    ProxyThread proxyThread;
+
+    public void launchProxy() throws IOException {
+        ServerSocket serverSocket = new ServerSocket(0);
+        proxyThread = new ProxyThread(serverSocket);
+        proxyThread.start();
+
+        System.out.println("Enabling online-mode fix.");
+
+        System.setProperty("http.proxyHost", serverSocket.getInetAddress().getHostAddress());
+        System.setProperty("http.proxyPort", "" + serverSocket.getLocalPort());
+        System.setProperty("http.nonProxyHosts", "localhost|127.0.0.1");
+    }
+
+    public void stopProxy() {
+        if (proxyThread != null) {
+            proxyThread.stop();
+            proxyThread = null;
+        }
+    }
 
     public static byte[] createChecksum(String filename) throws Exception {
         InputStream fis =  new FileInputStream(filename);
@@ -123,6 +145,10 @@ public class MineOnlineBroadcast extends JavaPlugin {
                             Properties propertiesFile = new Properties();
                             propertiesFile.load(new FileInputStream(new File("server.properties")));
 
+                            boolean isPublic = propertiesFile.getProperty("public", "true").equals("true");
+                            if(!isPublic)
+                                return;
+
                             String ip = propertiesFile.getProperty("serverlist-ip", propertiesFile.getProperty("server-ip", propertiesFile.getProperty("ip", null)));
                             String port = propertiesFile.getProperty("serverlist-port", propertiesFile.getProperty("server-port", propertiesFile.getProperty("port", "25565")));
                             int users = getServer().getOnlinePlayers().length;
@@ -162,10 +188,21 @@ public class MineOnlineBroadcast extends JavaPlugin {
         this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_LOGIN, this.listener, Event.Priority.Lowest, this);
         this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_QUIT, this.listener, Event.Priority.Highest, this);
         this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_KICK, this.listener, Event.Priority.Highest, this);
+        try {
+            Properties propertiesFile = new Properties();
+            propertiesFile.load(new FileInputStream(new File("server.properties")));
+            boolean onlineMode = propertiesFile.getProperty("online-mode", "true").equals("true");
+
+            if (onlineMode)
+                launchProxy();
+        } catch (Exception ex) {
+            log.warning("Failed to enable online-mode fix. Authentication may fail.");
+        }
     }
 
     @Override
     public void onDisable() {
         broadcastThread.interrupt();
+        stopProxy();
     }
 }
