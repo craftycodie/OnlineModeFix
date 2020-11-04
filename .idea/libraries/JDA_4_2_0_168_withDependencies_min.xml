@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="JDA-4.2.0_168-withDependencies-min">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/JDA-4.2.0_168-withDependencies-min.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/discord-webhooks-0.5.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
