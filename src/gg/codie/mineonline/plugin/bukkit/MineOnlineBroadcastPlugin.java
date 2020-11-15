@@ -175,7 +175,7 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
                             String md5 = propertiesFile.getProperty("version-md5", "");
                             boolean whitelisted = propertiesFile.getProperty("whitelist", "false").equals("true");
                             boolean dontListPlayers = propertiesFile.getProperty("dont-list-players", "false").equals("true");
-                            String motd = propertiesFile.getProperty("motd", null);
+                            String motd = propertiesFile.getProperty("serverlist-motd", null);
 
                             String[] playerNames = Arrays.stream(getServer().getOnlinePlayers()).map(Player::getName).collect(Collectors.toList()).toArray(new String[users]);
 
