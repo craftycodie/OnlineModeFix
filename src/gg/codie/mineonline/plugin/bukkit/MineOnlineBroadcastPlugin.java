@@ -298,7 +298,8 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
     @Override
     public void onDisable() {
         //unregister();
-        discord.shutdown();
+        if (discord != null)
+            discord.shutdown();
         broadcastThread.interrupt();
         stopProxy();
     }
