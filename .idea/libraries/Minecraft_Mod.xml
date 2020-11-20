@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Minecraft_Mod">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/Minecraft_Mod.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

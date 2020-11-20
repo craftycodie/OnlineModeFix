@@ -1,5 +1,3 @@
-package gg.codie.mineonline.plugin.bukkit;
-
 import gg.codie.common.input.EColorCodeColor;
 import gg.codie.minecraft.server.MinecraftColorCodeProvider;
 import gg.codie.mineonline.discord.DiscordChatBridge;
@@ -8,9 +6,6 @@ import gg.codie.mineonline.discord.IShutdownListener;
 import gg.codie.mineonline.discord.MinotarAvatarProvider;
 import gg.codie.mineonline.plugin.ProxyThread;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
 import java.lang.reflect.Constructor;
@@ -21,20 +16,24 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.util.Arrays;
 import java.util.Properties;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class MineOnlineBroadcastPlugin extends JavaPlugin {
+public class MineOnlineBroadcast extends Plugin {
+    private static String NAME = "MineOnlineBroadcast";
     Thread broadcastThread;
     public static long lastPing;
     MineOnlineBroadcastListener listener;
     Logger log;
+    String md5;
     ProxyThread proxyThread;
     DiscordChatBridge discord;
+    PluginRegisteredListener registeredListener;
+    boolean initialized;
+    String serverName = "Minecraft Server";
 
     public void launchProxy() throws IOException {
         ServerSocket serverSocket = new ServerSocket(0);
@@ -73,6 +72,16 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
         return complete.digest();
     }
 
+    public static String getMD5ChecksumForFile(String filename) throws Exception {
+        byte[] b = createChecksum(filename);
+        String result = "";
+
+        for (int i=0; i < b.length; i++) {
+            result += Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 );
+        }
+        return result.toUpperCase();
+    }
+
     public static void listServer(
             String ip,
             String port,
@@ -89,7 +98,7 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
         HttpURLConnection connection = null;
 
         try {
-            URLClassLoader classLoader = new URLClassLoader(new URL[] { MineOnlineBroadcastPlugin.class.getProtectionDomain().getCodeSource().getLocation() });
+            URLClassLoader classLoader = new URLClassLoader(new URL[] { MineOnlineBroadcast.class.getProtectionDomain().getCodeSource().getLocation() });
 
             Class jsonObjectClass = classLoader.loadClass("org.json.JSONObject");
 
@@ -137,26 +146,36 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
             }
             rd.close();
         } catch (Exception e) {
+
             e.printStackTrace();
         } finally {
+
             if (connection != null)
                 connection.disconnect();
         }
     }
 
-    @Override
-    public void onEnable() {
+    public void enable() {
         initialize();
+
+        this.setName(NAME);
 
         this.log = Logger.getLogger("Minecraft");
 
-        this.log.info("Enabled gg.codie.mineonline.plugin.bukkit.MineOnlineBroadcast");
+        this.log.info("Enabled MineOnlineBroadcast");
+
+        try {
+            md5 = getMD5ChecksumForFile("minecraft_server.jar");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            System.exit(1);
+        }
 
         broadcastThread = new Thread(new Runnable() {
             @Override
             public void run() {
                 while(true) {
-                    if (System.currentTimeMillis() - MineOnlineBroadcastPlugin.lastPing > 45000) {
+                    if (System.currentTimeMillis() - MineOnlineBroadcast.lastPing > 45000) {
                         lastPing = System.currentTimeMillis();
                         try {
                             Properties propertiesFile = new Properties();
@@ -168,16 +187,16 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
 
                             String ip = propertiesFile.getProperty("serverlist-ip", propertiesFile.getProperty("server-ip", propertiesFile.getProperty("ip", null)));
                             String port = propertiesFile.getProperty("serverlist-port", propertiesFile.getProperty("server-port", propertiesFile.getProperty("port", "25565")));
-                            int users = getServer().getOnlinePlayers().length;
+                            int users = etc.getServer().getPlayerList().size();
                             int maxUsers = Integer.parseInt(propertiesFile.getProperty("max-players", "20"));
                             String name = propertiesFile.getProperty("server-name", "Minecraft Server");
                             boolean onlineMode = propertiesFile.getProperty("online-mode", "true").equals("true");
-                            String md5 = propertiesFile.getProperty("version-md5", "");
+                            //String md5 = propertiesFile.getProperty("version-md5", "");
                             boolean whitelisted = propertiesFile.getProperty("whitelist", "false").equals("true");
                             boolean dontListPlayers = propertiesFile.getProperty("dont-list-players", "false").equals("true");
                             String motd = propertiesFile.getProperty("serverlist-motd", null);
 
-                            String[] playerNames = Arrays.stream(getServer().getOnlinePlayers()).map(Player::getName).collect(Collectors.toList()).toArray(new String[users]);
+                            String[] playerNames = etc.getServer().getPlayerList().stream().map(player -> player.getName()).collect(Collectors.toList()).toArray(new String[users]);
 
                             listServer(
                                     ip,
@@ -193,6 +212,7 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
                                     dontListPlayers
                             );
                         } catch (IOException ex) {
+                            //ex.printStackTrace();
                             // ignore.
                         }
                     }
@@ -204,6 +224,9 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
     }
 
     public void initialize() {
+        if(initialized)
+            return;
+
         this.log = Logger.getLogger("Minecraft");
 
         MinecraftColorCodeProvider colorCodeProvider = new MinecraftColorCodeProvider();
@@ -225,7 +248,7 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
             String discordToken = propertiesFile.getProperty("discord-token", null);
             String discordChannelID = propertiesFile.getProperty("discord-channel", null);
             String discordWebhookURL = propertiesFile.getProperty("discord-webhook-url", null);
-            String serverName = propertiesFile.getProperty("server-name", "Minecraft Server");
+            serverName = propertiesFile.getProperty("server-name", serverName);
 
 
             if (discordToken != null && discordChannelID != null) { // Create the discord bot if token and channel are present
@@ -272,7 +295,7 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
                         // remove double color codes that occur with resetting.
                         message = message.replace(colorCodeProvider.getColorCode(EColorCodeColor.White) + colorCodeProvider.getPrefix(), colorCodeProvider.getPrefix());
 
-                        getServer().broadcastMessage(message);
+                        etc.getServer().messageAll(message);
                     }
                 }, new IShutdownListener() {
                     @Override
@@ -289,23 +312,37 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
         }
 
         this.listener = new MineOnlineBroadcastListener(discord);
-        this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_LOGIN, this.listener, Event.Priority.Lowest, this);
-        this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_QUIT, this.listener, Event.Priority.Highest, this);
-        this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_KICK, this.listener, Event.Priority.Highest, this);
-        this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_CHAT, this.listener, Event.Priority.Highest, this);
+        this.register(PluginLoader.Hook.DISCONNECT);
+        this.register(PluginLoader.Hook.LOGIN);
+        this.register(PluginLoader.Hook.KICK);
+        this.register(PluginLoader.Hook.CHAT);
+
+        initialized = true;
     }
 
-//    private void unregister() {
-//        if(registeredListener != null)
-//            etc.getLoader().removeListener(registeredListener);
-//    }
+    private void register(PluginLoader.Hook hook, PluginListener.Priority priority) {
+        registeredListener = etc.getLoader().addListener(hook, this.listener, this, priority);
+    }
 
-    @Override
-    public void onDisable() {
-        //unregister();
+    private void unregister() {
+        if(registeredListener != null)
+            etc.getLoader().removeListener(registeredListener);
+    }
+
+    private void register(PluginLoader.Hook hook) {
+        this.register(hook, PluginListener.Priority.MEDIUM);
+    }
+
+    public void disable() {
+        if(!initialized)
+            return;
+
+        unregister();
         if (discord != null)
             discord.shutdown();
         broadcastThread.interrupt();
         stopProxy();
+
+        initialized = false;
     }
 }

@@ -11,5 +11,6 @@
     <orderEntry type="library" name="json" level="project" />
     <orderEntry type="library" name="craftbukkit" level="project" />
     <orderEntry type="library" exported="" name="JDA-4.2.0_168-withDependencies-min" level="project" />
+    <orderEntry type="library" name="Minecraft_Mod" level="project" />
   </component>
 </module>

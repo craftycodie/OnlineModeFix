@@ -2,32 +2,19 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="MineOnlineBroadcastBukkit" />
+      <artifact name="MineOnlineBroadcast" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e42abf2d-5ce3-4d3a-b3e0-db470c42f0ce" name="Default Changelist" comment="Added missing plugin.yml resource.">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/MineOnlineBroadcastBukkit.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/JDA_4_2_0_168_withDependencies_min.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/JDA-4.2.0_168-withDependencies-min.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/discord-webhooks-0.5.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gg/codie/common/input/AbstractColorCodeProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gg/codie/common/input/EColorCodeColor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gg/codie/common/input/IColorCodeProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gg/codie/minecraft/server/AbstractMinecraftColorCodeProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gg/codie/minecraft/server/MinecraftColorCodeProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gg/codie/mineonline/discord/DiscordChatBridge.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gg/codie/mineonline/discord/IAvatarProvider.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gg/codie/mineonline/discord/IMessageRecievedListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gg/codie/mineonline/discord/IShutdownListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/gg/codie/mineonline/discord/MinotarAvatarProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/MineOnlineBroadcast_Bukkit.xml" beforeDir="false" />
+    <list default="true" id="e42abf2d-5ce3-4d3a-b3e0-db470c42f0ce" name="Default Changelist" comment="Added bukkit chat bridge.">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Minecraft_Mod.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MineOnlineBroadcast.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MineOnlineBroadcastListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/MineOnlineBroadcastBukkit.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/MineOnlineBroadcast.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MineOnlineBroadcast-Bukkit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MineOnlineBroadcast-Bukkit.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/res/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/res/plugin.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MineOnlineBroadcast.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gg/codie/mineonline/plugin/bukkit/MineOnlineBroadcastPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MineOnlineBroadcastListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gg/codie/mineonline/plugin/bukkit/MineOnlineBroadcastListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gg/codie/mineonline/ProxyThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gg/codie/mineonline/plugin/ProxyThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MineOnlineBroadcast-Bukkit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/MineOnlineBroadcast.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gg/codie/mineonline/plugin/bukkit/MineOnlineBroadcastPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gg/codie/mineonline/plugin/bukkit/MineOnlineBroadcastPlugin.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,39 +26,12 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gg/codie/common/input/AbstractColorCodeProvider.java">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gg/codie/minecraft/server/AbstractMinecraftColorCodeProvider.java">
+        <entry file="jar://$PROJECT_DIR$/lib/craftbukkit1-7-3(1060).jar!/org/bukkit/event/Event.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+            <state relative-caret-position="765">
+              <caret line="50" column="16" selection-start-line="50" selection-start-column="16" selection-end-line="50" selection-end-column="16" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gg/codie/mineonline/discord/DiscordChatBridge.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="597">
-              <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
-              <folding>
-                <element signature="e#1763#2226#0" expanded="true" />
-                <element signature="e#2225#2226#0" expanded="true" />
-                <element signature="e#2258#2482#0" expanded="true" />
-                <element signature="e#2481#2482#0" expanded="true" />
-                <element signature="e#3646#3647#0" expanded="true" />
-                <element signature="e#3676#3677#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gg/codie/common/input/EColorCodeColor.java">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -92,16 +52,37 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MineOnlineBroadcast.iml">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/MineOnlineBroadcast.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gg/codie/mineonline/plugin/bukkit/MineOnlineBroadcastListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="36" column="153" selection-start-line="36" selection-start-column="153" selection-end-line="36" selection-end-column="153" />
+            <state relative-caret-position="561">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#301#302#0" expanded="true" />
-                <element signature="e#339#340#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MineOnlineBroadcastListener.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="561">
+              <caret line="36" selection-start-line="36" selection-end-line="36" />
             </state>
           </provider>
         </entry>
@@ -109,12 +90,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gg/codie/mineonline/plugin/bukkit/MineOnlineBroadcastPlugin.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="614">
-              <caret line="297" column="24" lean-forward="true" selection-start-line="297" selection-start-column="24" selection-end-line="297" selection-end-column="24" />
+            <state relative-caret-position="381">
+              <caret line="265" selection-start-line="265" selection-end-line="265" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#11866#11867#0" expanded="true" />
-                <element signature="e#11970#11971#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -123,8 +102,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/plugin.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="10" lean-forward="true" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+            <state relative-caret-position="17">
+              <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -132,12 +111,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/gg/codie/mineonline/plugin/ProxyThread.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="816">
-              <caret line="82" column="49" selection-start-line="82" selection-start-column="49" selection-end-line="82" selection-end-column="49" />
+            <state relative-caret-position="1904">
+              <caret line="128" column="18" selection-start-line="128" selection-start-column="18" selection-end-line="128" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#771#772#0" expanded="true" />
-                <element signature="e#807#808#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -164,6 +141,8 @@
       <find>System.out</find>
       <find>200 OK</find>
       <find>listener</find>
+      <find>PLAYER_</find>
+      <find>discord.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -178,7 +157,6 @@
         <option value="$PROJECT_DIR$/src/gg/codie/utils/ArrayUtils.java" />
         <option value="$PROJECT_DIR$/src/gg/codie/minecraft/api/SessionServer.java" />
         <option value="$PROJECT_DIR$/src/gg/codie/mineonline/ProxyThread.java" />
-        <option value="$PROJECT_DIR$/src/MineOnlineBroadcast.java" />
         <option value="$PROJECT_DIR$/src/gg/codie/mineonline/plugin/hmod/MineOnlineBroadcastListener.java" />
         <option value="$PROJECT_DIR$/src/MineOnlineBroadcastListener.java" />
         <option value="$PROJECT_DIR$/src/gg/codie/mineonline/discord/MinotarAvatarProvider.java" />
@@ -188,10 +166,11 @@
         <option value="$PROJECT_DIR$/src/gg/codie/common/input/IColorCodeProvider.java" />
         <option value="$PROJECT_DIR$/src/gg/codie/minecraft/MinecraftColorCodeProvider.java" />
         <option value="$PROJECT_DIR$/src/gg/codie/minecraft/server/MinecraftColorCodeProvider.java" />
-        <option value="$PROJECT_DIR$/src/gg/codie/mineonline/plugin/bukkit/MineOnlineBroadcastPlugin.java" />
         <option value="$PROJECT_DIR$/src/gg/codie/mineonline/discord/DiscordChatBridge.java" />
-        <option value="$PROJECT_DIR$/res/plugin.yml" />
         <option value="$PROJECT_DIR$/src/gg/codie/mineonline/plugin/bukkit/MineOnlineBroadcastListener.java" />
+        <option value="$PROJECT_DIR$/res/plugin.yml" />
+        <option value="$PROJECT_DIR$/src/gg/codie/mineonline/plugin/bukkit/MineOnlineBroadcastPlugin.java" />
+        <option value="$PROJECT_DIR$/src/MineOnlineBroadcast.java" />
       </list>
     </option>
   </component>
@@ -207,51 +186,50 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="MineOnlineBroadcast-Bukkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineOnlineBroadcast" type="b2602c69:ProjectViewProjectNode" />
               <item name="MineOnlineBroadcast-Bukkit" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="MineOnlineBroadcast-Bukkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineOnlineBroadcast" type="b2602c69:ProjectViewProjectNode" />
               <item name="MineOnlineBroadcast-Bukkit" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="MineOnlineBroadcast-Bukkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineOnlineBroadcast" type="b2602c69:ProjectViewProjectNode" />
               <item name="MineOnlineBroadcast-Bukkit" type="462c0819:PsiDirectoryNode" />
               <item name="res" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="MineOnlineBroadcast-Bukkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineOnlineBroadcast" type="b2602c69:ProjectViewProjectNode" />
               <item name="MineOnlineBroadcast-Bukkit" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="MineOnlineBroadcast-Bukkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineOnlineBroadcast" type="b2602c69:ProjectViewProjectNode" />
               <item name="MineOnlineBroadcast-Bukkit" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="codie" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="MineOnlineBroadcast-Bukkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineOnlineBroadcast" type="b2602c69:ProjectViewProjectNode" />
               <item name="MineOnlineBroadcast-Bukkit" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="codie" type="462c0819:PsiDirectoryNode" />
               <item name="input" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="MineOnlineBroadcast-Bukkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineOnlineBroadcast" type="b2602c69:ProjectViewProjectNode" />
               <item name="MineOnlineBroadcast-Bukkit" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="codie" type="462c0819:PsiDirectoryNode" />
               <item name="minecraft" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="MineOnlineBroadcast-Bukkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineOnlineBroadcast" type="b2602c69:ProjectViewProjectNode" />
               <item name="MineOnlineBroadcast-Bukkit" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="codie" type="462c0819:PsiDirectoryNode" />
@@ -259,14 +237,14 @@
               <item name="server" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="MineOnlineBroadcast-Bukkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineOnlineBroadcast" type="b2602c69:ProjectViewProjectNode" />
               <item name="MineOnlineBroadcast-Bukkit" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="codie" type="462c0819:PsiDirectoryNode" />
               <item name="mineonline" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="MineOnlineBroadcast-Bukkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineOnlineBroadcast" type="b2602c69:ProjectViewProjectNode" />
               <item name="MineOnlineBroadcast-Bukkit" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="codie" type="462c0819:PsiDirectoryNode" />
@@ -274,7 +252,7 @@
               <item name="discord" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="MineOnlineBroadcast-Bukkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineOnlineBroadcast" type="b2602c69:ProjectViewProjectNode" />
               <item name="MineOnlineBroadcast-Bukkit" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="codie" type="462c0819:PsiDirectoryNode" />
@@ -282,7 +260,7 @@
               <item name="plugin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="MineOnlineBroadcast-Bukkit" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MineOnlineBroadcast" type="b2602c69:ProjectViewProjectNode" />
               <item name="MineOnlineBroadcast-Bukkit" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="codie" type="462c0819:PsiDirectoryNode" />
@@ -294,13 +272,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1604458496786" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/discord-webhooks-0.5.0.jar!/" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1605910883775" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/Minecraft_Mod.jar!/" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Artifacts" />
@@ -309,15 +288,9 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Projects\GitHub\MineOnlineBroadcast-Bukkit\res" />
-    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
       <recent name="gg.codie.mineonline.plugin" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="gg.codie.mineonline.discord" />
-      <recent name="gg.codie.minecraft" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Projects\GitHub\MineOnlineBroadcast-Bukkit\src\gg\codie\minecraft" />
@@ -325,6 +298,14 @@
       <recent name="D:\Projects\GitHub\MineOnlineBroadcast-Bukkit\lib" />
       <recent name="D:\Projects\GitHub\MineOnlineBroadcast-Bukkit\src\gg\codie\utils" />
       <recent name="D:\Projects\GitHub\MineOnlineBroadcast-Bukkit" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="gg.codie.mineonline.discord" />
+      <recent name="gg.codie.minecraft" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Projects\GitHub\MineOnlineBroadcast-Bukkit\lib" />
+      <recent name="D:\Projects\GitHub\MineOnlineBroadcast-Bukkit\res" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -362,7 +343,15 @@
       <workItem from="1604084092619" duration="6413000" />
       <workItem from="1604095542330" duration="480000" />
       <workItem from="1604448227076" duration="167000" />
-      <workItem from="1604454551345" duration="3850000" />
+      <workItem from="1604454551345" duration="4716000" />
+      <workItem from="1604463379845" duration="5000" />
+      <workItem from="1605421140198" duration="1605000" />
+      <workItem from="1605450149709" duration="653000" />
+      <workItem from="1605470760671" duration="10000" />
+      <workItem from="1605549310343" duration="905000" />
+      <workItem from="1605551051993" duration="73000" />
+      <workItem from="1605605836689" duration="606000" />
+      <workItem from="1605906962619" duration="1218000" />
     </task>
     <task id="LOCAL-00001" summary="Added missing plugin.yml resource.">
       <created>1601569681272</created>
@@ -441,17 +430,51 @@
       <option name="project" value="LOCAL" />
       <updated>1604095778444</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Added bukkit chat bridge.">
+      <created>1604458542642</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1604458542642</updated>
+    </task>
+    <task id="LOCAL-00013" summary="dont-list-players and motd.">
+      <created>1605421396017</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1605421396017</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Changed &quot;motd&quot; to &quot;serverlist-motd&quot; due to a clash with classic.">
+      <created>1605425618806</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1605425618806</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Fixed a bug where events were failing if the discord bridge was off.">
+      <created>1605550052146</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1605550052146</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Handle null discord on disable.">
+      <created>1605551105777</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1605551105777</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23630000" />
+    <option name="totallyTimeSpent" value="29571000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1273" y="0" width="1294" height="1417" extended-state="0" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25769854" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29092383" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -469,9 +492,9 @@
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49838188" weight="0.33021808" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50161815" side_tool="true" weight="0.32791957" />
-      <window_info anchor="bottom" id="Messages" order="11" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32943925" />
       <window_info anchor="bottom" id="Database Changes" order="12" />
-      <window_info anchor="bottom" id="Version Control" order="13" sideWeight="0.49920508" visible="true" weight="0.32788163" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="13" sideWeight="0.49920508" visible="true" weight="0.3271028" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -498,7 +521,12 @@
     <MESSAGE value="Added an online-mode fix." />
     <MESSAGE value="Removed debug logs." />
     <MESSAGE value="Send max players as an int." />
-    <option name="LAST_COMMIT_MESSAGE" value="Send max players as an int." />
+    <MESSAGE value="Added bukkit chat bridge." />
+    <MESSAGE value="dont-list-players and motd." />
+    <MESSAGE value="Changed &quot;motd&quot; to &quot;serverlist-motd&quot; due to a clash with classic." />
+    <MESSAGE value="Fixed a bug where events were failing if the discord bridge was off." />
+    <MESSAGE value="Handle null discord on disable." />
+    <option name="LAST_COMMIT_MESSAGE" value="Handle null discord on disable." />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar://$PROJECT_DIR$/lib/craftbukkit-1.2_01_02.jar!/org/bukkit/event/player/PlayerListener.class" />
@@ -554,35 +582,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gg/codie/mineonline/plugin/ProxyThread.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="82" column="49" selection-start-line="82" selection-start-column="49" selection-end-line="82" selection-end-column="49" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#771#772#0" expanded="true" />
-            <element signature="e#807#808#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gg/codie/common/input/AbstractColorCodeProvider.java">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gg/codie/common/input/EColorCodeColor.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/gg/codie/common/input/IColorCodeProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gg/codie/minecraft/server/AbstractMinecraftColorCodeProvider.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
           <caret line="5" column="22" selection-start-line="5" selection-start-column="22" selection-end-line="5" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gg/codie/mineonline/discord/DiscordChatBridge.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gg/codie/common/input/EColorCodeColor.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/craftbukkit1-7-3(1060).jar!/org/bukkit/event/Event.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="50" column="16" selection-start-line="50" selection-start-column="16" selection-end-line="50" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gg/codie/common/input/IColorCodeProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
         </state>
       </provider>
     </entry>
@@ -593,49 +623,57 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gg/codie/mineonline/discord/DiscordChatBridge.java">
+    <entry file="file://$PROJECT_DIR$/src/gg/codie/mineonline/plugin/bukkit/MineOnlineBroadcastListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
+        <state relative-caret-position="561">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
           <folding>
-            <element signature="e#1763#2226#0" expanded="true" />
-            <element signature="e#2225#2226#0" expanded="true" />
-            <element signature="e#2258#2482#0" expanded="true" />
-            <element signature="e#2481#2482#0" expanded="true" />
-            <element signature="e#3646#3647#0" expanded="true" />
-            <element signature="e#3676#3677#0" expanded="true" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/plugin.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="10" lean-forward="true" selection-start-line="9" selection-start-column="10" selection-end-line="9" selection-end-column="10" />
+        <state relative-caret-position="17">
+          <caret line="1" column="15" selection-start-line="1" selection-start-column="15" selection-end-line="1" selection-end-column="15" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gg/codie/mineonline/plugin/ProxyThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1904">
+          <caret line="128" column="18" selection-start-line="128" selection-start-column="18" selection-end-line="128" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MineOnlineBroadcastListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="561">
+          <caret line="36" selection-start-line="36" selection-end-line="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MineOnlineBroadcast.iml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/gg/codie/mineonline/plugin/bukkit/MineOnlineBroadcastPlugin.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="614">
-          <caret line="297" column="24" lean-forward="true" selection-start-line="297" selection-start-column="24" selection-end-line="297" selection-end-column="24" />
+        <state relative-caret-position="381">
+          <caret line="265" selection-start-line="265" selection-end-line="265" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#11866#11867#0" expanded="true" />
-            <element signature="e#11970#11971#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gg/codie/mineonline/plugin/bukkit/MineOnlineBroadcastListener.java">
+    <entry file="file://$PROJECT_DIR$/src/MineOnlineBroadcast.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="153" selection-start-line="36" selection-start-column="153" selection-end-line="36" selection-end-column="153" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#301#302#0" expanded="true" />
-            <element signature="e#339#340#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="153">
+          <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -645,7 +683,7 @@
       <state key="ArtifactsStructureConfigurable.UI">
         <settings>
           <artifact-editor />
-          <last-edited>MineOnlineBroadcastBukkit</last-edited>
+          <last-edited>MineOnlineBroadcast</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -693,7 +731,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>MineOnlineBroadcast-Bukkit</last-edited>
+          <last-edited>MineOnlineBroadcast</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -717,7 +755,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>JDA-4.2.0_168-withDependencies-min</last-edited>
+          <last-edited>Minecraft_Mod</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

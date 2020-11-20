@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MineOnlineBroadcast-Bukkit.iml" filepath="$PROJECT_DIR$/MineOnlineBroadcast-Bukkit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MineOnlineBroadcast.iml" filepath="$PROJECT_DIR$/MineOnlineBroadcast.iml" />
     </modules>
   </component>
 </project>
