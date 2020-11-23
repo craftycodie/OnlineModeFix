@@ -188,11 +188,11 @@ public class MineOnlineBroadcast extends Plugin {
 
                             String ip = mineOnlineConfig.getConfigString("serverlist-ip");
                             if (ip == null) {
-                                ip = propertiesFile.getProperty("serverlist-ip", propertiesFile.getProperty("server-ip", propertiesFile.getProperty("ip", null)));
+                                ip = propertiesFile.getProperty("server-ip", propertiesFile.getProperty("ip", null));
                             }
                             String port = mineOnlineConfig.getConfigString("serverlist-port");
                             if (port == null) {
-                                port = propertiesFile.getProperty("serverlist-port", propertiesFile.getProperty("server-port", propertiesFile.getProperty("port", "25565")));
+                                port = propertiesFile.getProperty("server-port", propertiesFile.getProperty("port", "25565"));
                             }
                             int users = etc.getServer().getPlayerList().size();
                             int maxUsers = Integer.parseInt(propertiesFile.getProperty("max-players", "20"));

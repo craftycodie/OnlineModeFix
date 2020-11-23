@@ -169,11 +169,11 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
 
                             String ip = mineOnlineConfig.getConfigString("serverlist-ip");
                             if(ip == null) {
-                                ip = propertiesFile.getProperty("serverlist-ip", propertiesFile.getProperty("server-ip", propertiesFile.getProperty("ip", null)));
+                                ip = propertiesFile.getProperty("server-ip", propertiesFile.getProperty("ip", null));
                             }
                             String port = mineOnlineConfig.getConfigString("serverlist-port");
                             if(port == null) {
-                                propertiesFile.getProperty("serverlist-port", propertiesFile.getProperty("server-port", propertiesFile.getProperty("port", "25565")));
+                                propertiesFile.getProperty("server-port", propertiesFile.getProperty("port", "25565"));
                             }
                             int users = getServer().getOnlinePlayers().length;
                             int maxUsers = Integer.parseInt(propertiesFile.getProperty("max-players", "20"));
