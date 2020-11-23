@@ -159,37 +159,49 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
                 while (true) {
                     if (System.currentTimeMillis() - MineOnlineBroadcastPlugin.lastPing > 45000) {
                         lastPing = System.currentTimeMillis();
+                        try {
+                            Properties propertiesFile = new Properties();
+                            propertiesFile.load(new FileInputStream(new File("server.properties")));
 
-                        boolean isPublic = mineOnlineConfig.getConfigBoolean("public");
-                        if (!isPublic)
-                            return;
+                            boolean isPublic = mineOnlineConfig.getConfigBoolean("public");
+                            if (!isPublic)
+                                return;
 
-                        String ip = mineOnlineConfig.getConfigString("serverlist-ip");
-                        String port = mineOnlineConfig.getConfigString("serverlist-port");
-                        int users = getServer().getOnlinePlayers().length;
-                        int maxUsers = mineOnlineConfig.getConfigInteger("max-players");
-                        String name = mineOnlineConfig.getConfigString("server-name");
-                        boolean onlineMode = mineOnlineConfig.getConfigBoolean("online-mode");
-                        String md5 = mineOnlineConfig.getConfigString("version-md");
-                        boolean whitelisted = mineOnlineConfig.getConfigBoolean("whitelist");
-                        boolean dontListPlayers = mineOnlineConfig.getConfigBoolean("dont-list-players");
-                        String motd = mineOnlineConfig.getConfigString("serverlist-motd");
+                            String ip = mineOnlineConfig.getConfigString("serverlist-ip");
+                            if(ip == null) {
+                                ip = propertiesFile.getProperty("serverlist-ip", propertiesFile.getProperty("server-ip", propertiesFile.getProperty("ip", null)));
+                            }
+                            String port = mineOnlineConfig.getConfigString("serverlist-port");
+                            if(port == null) {
+                                propertiesFile.getProperty("serverlist-port", propertiesFile.getProperty("server-port", propertiesFile.getProperty("port", "25565")));
+                            }
+                            int users = getServer().getOnlinePlayers().length;
+                            int maxUsers = Integer.parseInt(propertiesFile.getProperty("max-players", "20"));
+                            String name = mineOnlineConfig.getConfigString("server-name");
+                            boolean onlineMode = propertiesFile.getProperty("online-mode", "true").equals("true");
+                            String md5 = mineOnlineConfig.getConfigString("version-md");
+                            boolean whitelisted = propertiesFile.getProperty("whitelist", "false").equals("true");
+                            boolean dontListPlayers = mineOnlineConfig.getConfigBoolean("dont-list-players");
+                            String motd = mineOnlineConfig.getConfigString("serverlist-motd");
 
-                        String[] playerNames = Arrays.stream(getServer().getOnlinePlayers()).map(Player::getName).collect(Collectors.toList()).toArray(new String[users]);
+                            String[] playerNames = Arrays.stream(getServer().getOnlinePlayers()).map(Player::getName).collect(Collectors.toList()).toArray(new String[users]);
 
-                        listServer(
-                                ip,
-                                port,
-                                users,
-                                maxUsers,
-                                name,
-                                onlineMode,
-                                md5,
-                                whitelisted,
-                                playerNames,
-                                motd,
-                                dontListPlayers
-                        );
+                            listServer(
+                                    ip,
+                                    port,
+                                    users,
+                                    maxUsers,
+                                    name,
+                                    onlineMode,
+                                    md5,
+                                    whitelisted,
+                                    playerNames,
+                                    motd,
+                                    dontListPlayers
+                            );
+                        } catch (IOException ex) {
+                            // ignore.
+                        }
                     }
                 }
             }

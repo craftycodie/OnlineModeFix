@@ -20,11 +20,8 @@ public class MineOnlineConfig {
         generateConfigOption("public", true);
         generateConfigOption("serverlist-ip", null);
         generateConfigOption("serverlist-port", 25565);
-        generateConfigOption("max-players", 20);
         generateConfigOption("server-name", "Minecraft Server");
-        generateConfigOption("online-mode", true);
         generateConfigOption("version-md", "");
-        generateConfigOption("whitelist", false);
         generateConfigOption("dont-list-players", false);
         generateConfigOption("serverlist-motd", null);
         //Discord
