@@ -153,7 +153,6 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
 
         this.log.info("Enabled gg.codie.mineonline.plugin.bukkit.MineOnlineBroadcast");
 
-        mineOnlineConfig = new MineOnlineConfig(new File(this.getDataFolder(), "config.yml"));
         broadcastThread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -203,6 +202,8 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
         this.log = Logger.getLogger("Minecraft");
 
         MinecraftColorCodeProvider colorCodeProvider = new MinecraftColorCodeProvider();
+
+        mineOnlineConfig = new MineOnlineConfig(new File(this.getDataFolder(), "config.yml"));
 
         Properties propertiesFile = new Properties();
 
