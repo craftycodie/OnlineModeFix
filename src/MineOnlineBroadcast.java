@@ -34,6 +34,7 @@ public class MineOnlineBroadcast extends Plugin {
     PluginRegisteredListener registeredListener;
     boolean initialized;
     String serverName = "Minecraft Server";
+    private MineOnlineConfig mineOnlineConfig;
 
     public void launchProxy() throws IOException {
         ServerSocket serverSocket = new ServerSocket(0);
@@ -55,7 +56,7 @@ public class MineOnlineBroadcast extends Plugin {
     }
 
     public static byte[] createChecksum(String filename) throws Exception {
-        InputStream fis =  new FileInputStream(filename);
+        InputStream fis = new FileInputStream(filename);
 
         byte[] buffer = new byte[1024];
         MessageDigest complete = MessageDigest.getInstance("MD5");
@@ -76,8 +77,8 @@ public class MineOnlineBroadcast extends Plugin {
         byte[] b = createChecksum(filename);
         String result = "";
 
-        for (int i=0; i < b.length; i++) {
-            result += Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 );
+        for (int i = 0; i < b.length; i++) {
+            result += Integer.toString((b[i] & 0xff) + 0x100, 16).substring(1);
         }
         return result.toUpperCase();
     }
@@ -98,7 +99,7 @@ public class MineOnlineBroadcast extends Plugin {
         HttpURLConnection connection = null;
 
         try {
-            URLClassLoader classLoader = new URLClassLoader(new URL[] { MineOnlineBroadcast.class.getProtectionDomain().getCodeSource().getLocation() });
+            URLClassLoader classLoader = new URLClassLoader(new URL[]{MineOnlineBroadcast.class.getProtectionDomain().getCodeSource().getLocation()});
 
             Class jsonObjectClass = classLoader.loadClass("org.json.JSONObject");
 
@@ -117,12 +118,12 @@ public class MineOnlineBroadcast extends Plugin {
             jsonObjectPut.invoke(jsonObject, "onlinemode", onlineMode);
             jsonObjectPut.invoke(jsonObject, "md5", md5);
             jsonObjectPut.invoke(jsonObject, "whitelisted", whitelisted);
-            if(!dontListPlayers)
+            if (!dontListPlayers)
                 jsonObjectPut.invoke(jsonObject, "players", playerNames);
             jsonObjectPut.invoke(jsonObject, "motd", motd);
             jsonObjectPut.invoke(jsonObject, "dontListPlayers", dontListPlayers);
 
-            String json = (String)jsonObjectToString.invoke(jsonObject);
+            String json = (String) jsonObjectToString.invoke(jsonObject);
 
             URL url = new URL("https://mineonline.codie.gg/api/servers");
             connection = (HttpURLConnection) url.openConnection();
@@ -174,47 +175,39 @@ public class MineOnlineBroadcast extends Plugin {
         broadcastThread = new Thread(new Runnable() {
             @Override
             public void run() {
-                while(true) {
+                while (true) {
                     if (System.currentTimeMillis() - MineOnlineBroadcast.lastPing > 45000) {
                         lastPing = System.currentTimeMillis();
-                        try {
-                            Properties propertiesFile = new Properties();
-                            propertiesFile.load(new FileInputStream(new File("server.properties")));
+                        boolean isPublic = mineOnlineConfig.getConfigBoolean("public");
+                        if (!isPublic)
+                            return;
 
-                            boolean isPublic = propertiesFile.getProperty("public", "true").equals("true");
-                            if(!isPublic)
-                                return;
+                        String ip = mineOnlineConfig.getConfigString("serverlist-ip");
+                        String port = mineOnlineConfig.getConfigString("serverlist-port");
+                        int users = etc.getServer().getPlayerList().size();
+                        int maxUsers = mineOnlineConfig.getConfigInteger("max-players");
+                        String name = mineOnlineConfig.getConfigString("server-name");
+                        boolean onlineMode = mineOnlineConfig.getConfigBoolean("online-mode");
+                        //String md5 = propertiesFile.getProperty("version-md5", "");
+                        boolean whitelisted = mineOnlineConfig.getConfigBoolean("whitelist");
+                        boolean dontListPlayers = mineOnlineConfig.getConfigBoolean("dont-list-players");
+                        String motd = mineOnlineConfig.getConfigString("serverlist-motd");
 
-                            String ip = propertiesFile.getProperty("serverlist-ip", propertiesFile.getProperty("server-ip", propertiesFile.getProperty("ip", null)));
-                            String port = propertiesFile.getProperty("serverlist-port", propertiesFile.getProperty("server-port", propertiesFile.getProperty("port", "25565")));
-                            int users = etc.getServer().getPlayerList().size();
-                            int maxUsers = Integer.parseInt(propertiesFile.getProperty("max-players", "20"));
-                            String name = propertiesFile.getProperty("server-name", "Minecraft Server");
-                            boolean onlineMode = propertiesFile.getProperty("online-mode", "true").equals("true");
-                            //String md5 = propertiesFile.getProperty("version-md5", "");
-                            boolean whitelisted = propertiesFile.getProperty("whitelist", "false").equals("true");
-                            boolean dontListPlayers = propertiesFile.getProperty("dont-list-players", "false").equals("true");
-                            String motd = propertiesFile.getProperty("serverlist-motd", null);
+                        String[] playerNames = etc.getServer().getPlayerList().stream().map(player -> player.getName()).collect(Collectors.toList()).toArray(new String[users]);
 
-                            String[] playerNames = etc.getServer().getPlayerList().stream().map(player -> player.getName()).collect(Collectors.toList()).toArray(new String[users]);
-
-                            listServer(
-                                    ip,
-                                    port,
-                                    users,
-                                    maxUsers,
-                                    name,
-                                    onlineMode,
-                                    md5,
-                                    whitelisted,
-                                    playerNames,
-                                    motd,
-                                    dontListPlayers
-                            );
-                        } catch (IOException ex) {
-                            //ex.printStackTrace();
-                            // ignore.
-                        }
+                        listServer(
+                                ip,
+                                port,
+                                users,
+                                maxUsers,
+                                name,
+                                onlineMode,
+                                md5,
+                                whitelisted,
+                                playerNames,
+                                motd,
+                                dontListPlayers
+                        );
                     }
                 }
             }
@@ -224,13 +217,15 @@ public class MineOnlineBroadcast extends Plugin {
     }
 
     public void initialize() {
-        if(initialized)
+        if (initialized)
             return;
 
         this.log = Logger.getLogger("Minecraft");
 
         MinecraftColorCodeProvider colorCodeProvider = new MinecraftColorCodeProvider();
 
+        mineOnlineConfig = new MineOnlineConfig(new File("." + File.separator + "plugins" + File.separator + "MineOnlineBroadcast" + File.separator + "config.properties"));
+        
         Properties propertiesFile = new Properties();
 
         try {
@@ -277,7 +272,7 @@ public class MineOnlineBroadcast extends Plugin {
                         String saneName = event.getAuthor().getName();
                         String saneMessage = sb.toString();
 
-                        if(saneMessage.trim().isEmpty())
+                        if (saneMessage.trim().isEmpty())
                             return;
 
                         Pattern trailingWhite = Pattern.compile(colorCodeProvider.getColorCode(EColorCodeColor.White) + "\\s{0,}$");
@@ -325,7 +320,7 @@ public class MineOnlineBroadcast extends Plugin {
     }
 
     private void unregister() {
-        if(registeredListener != null)
+        if (registeredListener != null)
             etc.getLoader().removeListener(registeredListener);
     }
 
@@ -334,7 +329,7 @@ public class MineOnlineBroadcast extends Plugin {
     }
 
     public void disable() {
-        if(!initialized)
+        if (!initialized)
             return;
 
         unregister();
