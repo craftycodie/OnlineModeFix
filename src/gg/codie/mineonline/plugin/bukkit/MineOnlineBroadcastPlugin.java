@@ -181,7 +181,7 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
                             int maxUsers = Integer.parseInt(propertiesFile.getProperty("max-players", "20"));
                             String name = mineOnlineConfig.getConfigString("server-name");
                             boolean onlineMode = propertiesFile.getProperty("online-mode", "true").equals("true");
-                            String md5 = mineOnlineConfig.getConfigString("version-md");
+                            String md5 = mineOnlineConfig.getConfigString("version-md5");
                             boolean whitelisted = propertiesFile.getProperty("whitelist", "false").equals("true");
                             boolean dontListPlayers = mineOnlineConfig.getConfigBoolean("dont-list-players");
                             String motd = mineOnlineConfig.getConfigString("serverlist-motd");

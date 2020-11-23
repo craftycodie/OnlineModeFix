@@ -18,9 +18,9 @@ public class MineOnlineConfig extends Configuration {
         //Setting
         generateConfigOption("public", true);
         generateConfigOption("serverlist-ip", null);
-        generateConfigOption("serverlist-port", 25565);
+        generateConfigOption("serverlist-port", null);
         generateConfigOption("server-name", "Minecraft Server");
-        generateConfigOption("version-md", "");
+        generateConfigOption("version-md5", "");
         generateConfigOption("dont-list-players", false);
         generateConfigOption("serverlist-motd", null);
         generateConfigOption("beta-evolutions-support", false);

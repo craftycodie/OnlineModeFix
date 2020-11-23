@@ -19,11 +19,10 @@ public class MineOnlineConfig {
         //Setting
         generateConfigOption("public", true);
         generateConfigOption("serverlist-ip", null);
-        generateConfigOption("serverlist-port", 25565);
+        generateConfigOption("serverlist-port", null);
         generateConfigOption("server-name", "Minecraft Server");
-        generateConfigOption("version-md", "");
         generateConfigOption("dont-list-players", false);
-        generateConfigOption("serverlist-motd", null);
+        generateConfigOption("serverlist-motd", false);
         generateConfigOption("beta-evolutions-support", false);
         //Discord
         generateConfigOption("discord-token", null);
