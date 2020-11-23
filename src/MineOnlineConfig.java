@@ -27,6 +27,11 @@ public class MineOnlineConfig {
         generateConfigOption("whitelist", false);
         generateConfigOption("dont-list-players", false);
         generateConfigOption("serverlist-motd", null);
+        //Discord
+        generateConfigOption("discord-token", null);
+        generateConfigOption("discord-channel", null);
+        generateConfigOption("discord-webhook-url", null);
+
     }
 
     //Getters Start
@@ -35,6 +40,15 @@ public class MineOnlineConfig {
     }
 
     public String getConfigString(String key) {
+        if(getConfigOption(key) == null) {
+            return null;
+        }
+        //Hacky solution for hmod config storing null as text
+        if(String.valueOf(getConfigOption(key)).equalsIgnoreCase("null")) {
+            return null;
+        }
+
+
         return String.valueOf(getConfigOption(key));
     }
 

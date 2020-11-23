@@ -218,10 +218,10 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
 
         try {
             propertiesFile.load(new FileInputStream(new File("server.properties")));
-            String discordToken = propertiesFile.getProperty("discord-token", null);
-            String discordChannelID = propertiesFile.getProperty("discord-channel", null);
-            String discordWebhookURL = propertiesFile.getProperty("discord-webhook-url", null);
-            String serverName = propertiesFile.getProperty("server-name", "Minecraft Server");
+            String discordToken = mineOnlineConfig.getConfigString("discord-token");
+            String discordChannelID = mineOnlineConfig.getConfigString("discord-channel");
+            String discordWebhookURL = mineOnlineConfig.getConfigString("discord-webhook-url");
+            String serverName = mineOnlineConfig.getConfigString("server-name");
 
 
             if (discordToken != null && discordChannelID != null) { // Create the discord bot if token and channel are present

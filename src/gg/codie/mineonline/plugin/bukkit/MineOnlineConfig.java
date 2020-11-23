@@ -26,7 +26,10 @@ public class MineOnlineConfig extends Configuration {
         generateConfigOption("whitelist", false);
         generateConfigOption("dont-list-players", false);
         generateConfigOption("serverlist-motd", null);
-
+        //Discord
+        generateConfigOption("discord-token", null);
+        generateConfigOption("discord-channel", null);
+        generateConfigOption("discord-webhook-url", null);
     }
 
     private void generateConfigOption(String key, Object defaultValue) {

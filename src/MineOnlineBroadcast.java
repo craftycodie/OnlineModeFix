@@ -225,7 +225,7 @@ public class MineOnlineBroadcast extends Plugin {
         MinecraftColorCodeProvider colorCodeProvider = new MinecraftColorCodeProvider();
 
         mineOnlineConfig = new MineOnlineConfig(new File("." + File.separator + "plugins" + File.separator + "MineOnlineBroadcast" + File.separator + "config.properties"));
-        
+
         Properties propertiesFile = new Properties();
 
         try {
@@ -240,10 +240,10 @@ public class MineOnlineBroadcast extends Plugin {
 
         try {
             propertiesFile.load(new FileInputStream(new File("server.properties")));
-            String discordToken = propertiesFile.getProperty("discord-token", null);
-            String discordChannelID = propertiesFile.getProperty("discord-channel", null);
-            String discordWebhookURL = propertiesFile.getProperty("discord-webhook-url", null);
-            serverName = propertiesFile.getProperty("server-name", serverName);
+            String discordToken = mineOnlineConfig.getConfigString("discord-token");
+            String discordChannelID = mineOnlineConfig.getConfigString("discord-channel");
+            String discordWebhookURL = mineOnlineConfig.getConfigString("discord-webhook-url");
+            serverName = mineOnlineConfig.getConfigString("server-name");
 
 
             if (discordToken != null && discordChannelID != null) { // Create the discord bot if token and channel are present
