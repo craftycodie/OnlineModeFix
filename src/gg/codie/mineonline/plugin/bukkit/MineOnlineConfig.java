@@ -47,6 +47,15 @@ public class MineOnlineConfig extends Configuration {
     }
 
     public String getConfigString(String key) {
+        if(getConfigOption(key) == null) {
+            return null;
+        }
+        //Hacky solution
+        if(String.valueOf(getConfigOption(key)).equalsIgnoreCase("null")) {
+            return null;
+        }
+
+
         return String.valueOf(getConfigOption(key));
     }
 
