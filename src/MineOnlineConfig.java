@@ -24,6 +24,7 @@ public class MineOnlineConfig {
         generateConfigOption("version-md", "");
         generateConfigOption("dont-list-players", false);
         generateConfigOption("serverlist-motd", null);
+        generateConfigOption("beta-evolutions-support", false);
         //Discord
         generateConfigOption("discord-token", null);
         generateConfigOption("discord-channel", null);

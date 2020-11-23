@@ -94,7 +94,8 @@ public class MineOnlineBroadcast extends Plugin {
             boolean whitelisted,
             String[] playerNames,
             String motd,
-            boolean dontListPlayers
+            boolean dontListPlayers,
+            boolean useBetaEvolutionsAuth
     ) {
         HttpURLConnection connection = null;
 
@@ -122,6 +123,7 @@ public class MineOnlineBroadcast extends Plugin {
                 jsonObjectPut.invoke(jsonObject, "players", playerNames);
             jsonObjectPut.invoke(jsonObject, "motd", motd);
             jsonObjectPut.invoke(jsonObject, "dontListPlayers", dontListPlayers);
+            jsonObjectPut.invoke(jsonObject, "useBetaEvolutionsAuth", useBetaEvolutionsAuth);
 
             String json = (String) jsonObjectToString.invoke(jsonObject);
 
@@ -202,6 +204,7 @@ public class MineOnlineBroadcast extends Plugin {
                             boolean whitelisted = propertiesFile.getProperty("whitelist", "false").equals("true");
                             boolean dontListPlayers = mineOnlineConfig.getConfigBoolean("dont-list-players");
                             String motd = mineOnlineConfig.getConfigString("serverlist-motd");
+                            boolean useBetaEvolutionsAuth = mineOnlineConfig.getConfigBoolean("beta-evolutions-support");
 
                             String[] playerNames = etc.getServer().getPlayerList().stream().map(player -> player.getName()).collect(Collectors.toList()).toArray(new String[users]);
 
@@ -216,7 +219,8 @@ public class MineOnlineBroadcast extends Plugin {
                                     whitelisted,
                                     playerNames,
                                     motd,
-                                    dontListPlayers
+                                    dontListPlayers,
+                                    useBetaEvolutionsAuth
                             );
                         } catch (IOException ex) {
                             //ex.printStackTrace();
