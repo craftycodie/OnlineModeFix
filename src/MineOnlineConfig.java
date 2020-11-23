@@ -22,7 +22,7 @@ public class MineOnlineConfig {
         generateConfigOption("serverlist-port", null);
         generateConfigOption("server-name", "Minecraft Server");
         generateConfigOption("dont-list-players", false);
-        generateConfigOption("serverlist-motd", false);
+        generateConfigOption("serverlist-motd", null);
         generateConfigOption("beta-evolutions-support", false);
         //Discord
         generateConfigOption("discord-token", null);
@@ -44,7 +44,6 @@ public class MineOnlineConfig {
         if(String.valueOf(getConfigOption(key)).equalsIgnoreCase("null")) {
             return null;
         }
-
 
         return String.valueOf(getConfigOption(key));
     }
@@ -70,7 +69,7 @@ public class MineOnlineConfig {
 
 
     private void generateConfigOption(String key, Object defaultValue) {
-        if (propertiesFile.getProperty(key) == null) {
+        if (propertiesFile.getProperty(key).equals("") || propertiesFile.getProperty(key) == null) {
             propertiesFile.setString(key, String.valueOf(defaultValue));
         }
         final Object value = propertiesFile.getProperty(key);
