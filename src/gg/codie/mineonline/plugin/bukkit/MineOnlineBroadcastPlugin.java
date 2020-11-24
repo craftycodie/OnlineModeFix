@@ -153,7 +153,7 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
 
         this.log = Logger.getLogger("Minecraft");
 
-        this.log.info("Enabled gg.codie.mineonline.plugin.bukkit.MineOnlineBroadcast");
+        this.log.info("Enabled MineOnlineBroadcast");
 
         broadcastThread = new Thread(new Runnable() {
             @Override
