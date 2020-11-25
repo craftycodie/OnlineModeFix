@@ -1,12 +1,17 @@
 import gg.codie.common.input.EColorCodeColor;
 import gg.codie.minecraft.server.MinecraftColorCodeProvider;
+import gg.codie.mineonline.api.MineOnlineAPI;
 import gg.codie.mineonline.discord.DiscordChatBridge;
 import gg.codie.mineonline.discord.IMessageRecievedListener;
 import gg.codie.mineonline.discord.IShutdownListener;
 import gg.codie.mineonline.discord.MinotarAvatarProvider;
 import gg.codie.mineonline.plugin.ProxyThread;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.json.JSONObject;
 
+import javax.imageio.IIOException;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -16,7 +21,9 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,6 +42,7 @@ public class MineOnlineBroadcast extends Plugin {
     boolean initialized;
     String serverName = "Minecraft Server";
     private MineOnlineConfig mineOnlineConfig;
+    String serverUUID;
 
     public void launchProxy() throws IOException {
         ServerSocket serverSocket = new ServerSocket(0);
@@ -81,81 +89,6 @@ public class MineOnlineBroadcast extends Plugin {
             result += Integer.toString((b[i] & 0xff) + 0x100, 16).substring(1);
         }
         return result.toUpperCase();
-    }
-
-    public static void listServer(
-            String ip,
-            String port,
-            int users,
-            int maxUsers,
-            String name,
-            boolean onlineMode,
-            String md5,
-            boolean whitelisted,
-            String[] playerNames,
-            String motd,
-            boolean dontListPlayers,
-            boolean useBetaEvolutionsAuth
-    ) {
-        HttpURLConnection connection = null;
-
-        try {
-            URLClassLoader classLoader = new URLClassLoader(new URL[]{MineOnlineBroadcast.class.getProtectionDomain().getCodeSource().getLocation()});
-
-            Class jsonObjectClass = classLoader.loadClass("org.json.JSONObject");
-
-            Constructor jsonObjectConstructor = jsonObjectClass.getConstructor();
-            Method jsonObjectPut = jsonObjectClass.getMethod("put", String.class, Object.class);
-            Method jsonObjectToString = jsonObjectClass.getMethod("toString");
-
-            Object jsonObject = jsonObjectConstructor.newInstance();
-            if (ip != null)
-                jsonObjectPut.invoke(jsonObject, "ip", ip);
-            jsonObjectPut.invoke(jsonObject, "port", port);
-            if (users > -1 && !dontListPlayers)
-                jsonObjectPut.invoke(jsonObject, "users", users);
-            jsonObjectPut.invoke(jsonObject, "max", maxUsers);
-            jsonObjectPut.invoke(jsonObject, "name", name);
-            jsonObjectPut.invoke(jsonObject, "onlinemode", onlineMode);
-            jsonObjectPut.invoke(jsonObject, "md5", md5);
-            jsonObjectPut.invoke(jsonObject, "whitelisted", whitelisted);
-            if (!dontListPlayers)
-                jsonObjectPut.invoke(jsonObject, "players", playerNames);
-            jsonObjectPut.invoke(jsonObject, "motd", motd);
-            jsonObjectPut.invoke(jsonObject, "dontListPlayers", dontListPlayers);
-            jsonObjectPut.invoke(jsonObject, "useBetaEvolutionsAuth", useBetaEvolutionsAuth);
-
-            String json = (String) jsonObjectToString.invoke(jsonObject);
-
-            URL url = new URL("https://mineonline.codie.gg/api/servers");
-            connection = (HttpURLConnection) url.openConnection();
-            connection.setRequestProperty("Content-Type", "application/json");
-            connection.setRequestMethod("POST");
-            connection.setDoInput(true);
-            connection.setDoOutput(true);
-
-            connection.getOutputStream().write(json.getBytes(StandardCharsets.UTF_8));
-            connection.getOutputStream().flush();
-            connection.getOutputStream().close();
-
-            InputStream is = connection.getInputStream();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(is));
-
-            StringBuilder response = new StringBuilder();
-            String line;
-            while ((line = rd.readLine()) != null) {
-                response.append(line);
-                response.append('\r');
-            }
-            rd.close();
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        } finally {
-
-            if (connection != null)
-                connection.disconnect();
-        }
     }
 
     public void enable() {
@@ -208,7 +141,27 @@ public class MineOnlineBroadcast extends Plugin {
 
                             String[] playerNames = etc.getServer().getPlayerList().stream().map(player -> player.getName()).collect(Collectors.toList()).toArray(new String[users]);
 
-                            listServer(
+                            String serverIcon = null;
+
+                            try {
+                                BufferedImage serverIconBufferedImage = ImageIO.read(new File(System.getProperty("user.dir") + File.separator + "server-icon.png"));
+                                if (serverIconBufferedImage.getHeight() <= 64 && serverIconBufferedImage.getWidth() <= 64) {
+                                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                                    try {
+                                        ImageIO.write(serverIconBufferedImage, "png", bos);
+                                        byte[] bytes = bos.toByteArray();
+                                        Base64.Encoder encoder = Base64.getEncoder();
+                                        serverIcon = encoder.encodeToString(bytes);
+                                        serverIcon = serverIcon.replace(System.lineSeparator(), "");
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            } catch (IIOException ex) {
+                                ex.printStackTrace();
+                            }
+
+                            serverUUID = MineOnlineAPI.listServer(
                                     ip,
                                     port,
                                     users,
@@ -220,10 +173,11 @@ public class MineOnlineBroadcast extends Plugin {
                                     playerNames,
                                     motd,
                                     dontListPlayers,
-                                    useBetaEvolutionsAuth
+                                    useBetaEvolutionsAuth,
+                                    serverIcon
                             );
                         } catch (IOException ex) {
-                            //ex.printStackTrace();
+                            ex.printStackTrace();
                             // ignore.
                         }
                     }
@@ -262,7 +216,6 @@ public class MineOnlineBroadcast extends Plugin {
             String discordChannelID = mineOnlineConfig.getConfigString("discord-channel");
             String discordWebhookURL = mineOnlineConfig.getConfigString("discord-webhook-url");
             serverName = mineOnlineConfig.getConfigString("server-name");
-
 
             if (discordToken != null && discordChannelID != null) { // Create the discord bot if token and channel are present
                 discord = new DiscordChatBridge(new MinotarAvatarProvider(), discordChannelID, discordToken, discordWebhookURL, new IMessageRecievedListener() {
@@ -349,6 +302,14 @@ public class MineOnlineBroadcast extends Plugin {
     public void disable() {
         if (!initialized)
             return;
+
+        if (serverUUID != null) {
+            try {
+                MineOnlineAPI.deleteServerListing(serverUUID);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
 
         unregister();
         if (discord != null)
