@@ -109,7 +109,7 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
                             String name = mineOnlineConfig.getConfigString("server-name");
                             boolean onlineMode = propertiesFile.getProperty("online-mode", "true").equals("true");
                             String md5 = mineOnlineConfig.getConfigString("version-md5");
-                            boolean whitelisted = propertiesFile.getProperty("whitelist", "false").equals("true");
+                            boolean whitelisted = propertiesFile.getProperty("white-list", "false").equals("true");
                             boolean dontListPlayers = mineOnlineConfig.getConfigBoolean("dont-list-players");
                             String motd = mineOnlineConfig.getConfigString("serverlist-motd");
                             boolean useBetaEvolutionsAuth = mineOnlineConfig.getConfigBoolean("beta-evolutions-support");
