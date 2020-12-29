@@ -134,6 +134,15 @@ public class ProxyThread implements Runnable {
                             clientSocket.getOutputStream().flush();
                             clientSocket.getOutputStream().close();
                             continue;
+                        } else {
+                            String responseHeaders =
+                                    "HTTP/1.0 200 OKServer:Werkzeug/1.0.1 Python/3.7.0\r\n\r\n";
+
+                            clientSocket.getOutputStream().write(responseHeaders.getBytes());
+                            clientSocket.getOutputStream().write("bad login".getBytes(StandardCharsets.UTF_8));
+                            clientSocket.getOutputStream().flush();
+                            clientSocket.getOutputStream().close();
+                            continue;
                         }
                     }
                 }
