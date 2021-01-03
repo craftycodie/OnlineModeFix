@@ -24,6 +24,12 @@ public class MineOnlineBroadcastListener extends PlayerListener {
             discord.sendDiscordMessage("", "**" + colorCodeProvider.removeColorCodes(event.getPlayer().getName()) + "** joined the game.");
     }
 
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        MineOnlineBroadcastPlugin.lastPing = 0;
+        if (discord != null)
+            discord.sendDiscordMessage("", "**" + colorCodeProvider.removeColorCodes(event.getPlayer().getName()) + "** joined the game.");
+    }
+
     public void onPlayerKick(PlayerKickEvent event) {
         MineOnlineBroadcastPlugin.lastPing = 0;
         if (discord != null)

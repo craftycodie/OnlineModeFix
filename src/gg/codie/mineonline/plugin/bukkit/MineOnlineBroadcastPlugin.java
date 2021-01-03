@@ -129,11 +129,11 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
                                         serverIcon = encoder.encodeToString(bytes);
                                         serverIcon = serverIcon.replace(System.lineSeparator(), "");
                                     } catch (IOException e) {
-                                        e.printStackTrace();
+//                                        e.printStackTrace();
                                     }
                                 }
                             } catch (IIOException ex) {
-                                ex.printStackTrace();
+//                                ex.printStackTrace();
                             }
 
                             serverUUID = MineOnlineAPI.listServer(
@@ -250,7 +250,12 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
         }
 
         this.listener = new MineOnlineBroadcastListener(discord);
-        this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_LOGIN, this.listener, Event.Priority.Lowest, this);
+        try {
+            ClassLoader.getSystemClassLoader().loadClass("org.bukkit.event.player.PlayerJoinEvent");
+            this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_JOIN, this.listener, Event.Priority.Highest, this);
+        } catch (ClassNotFoundException ex) {
+            this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_LOGIN, this.listener, Event.Priority.Lowest, this);
+        }
         this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_QUIT, this.listener, Event.Priority.Highest, this);
         this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_KICK, this.listener, Event.Priority.Highest, this);
         this.getServer().getPluginManager().registerEvent(Event.Type.PLAYER_CHAT, this.listener, Event.Priority.Highest, this);

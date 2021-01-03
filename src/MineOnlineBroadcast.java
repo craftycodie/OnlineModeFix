@@ -154,11 +154,11 @@ public class MineOnlineBroadcast extends Plugin {
                                         serverIcon = encoder.encodeToString(bytes);
                                         serverIcon = serverIcon.replace(System.lineSeparator(), "");
                                     } catch (IOException e) {
-                                        e.printStackTrace();
+//                                        e.printStackTrace();
                                     }
                                 }
                             } catch (IIOException ex) {
-                                ex.printStackTrace();
+//                                ex.printStackTrace();
                             }
 
                             serverUUID = MineOnlineAPI.listServer(
@@ -177,7 +177,7 @@ public class MineOnlineBroadcast extends Plugin {
                                     serverIcon
                             );
                         } catch (IOException ex) {
-                            ex.printStackTrace();
+//                            ex.printStackTrace();
                             // ignore.
                         }
                     }
