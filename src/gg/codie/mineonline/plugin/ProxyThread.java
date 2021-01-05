@@ -162,6 +162,9 @@ public class ProxyThread implements Runnable {
                 byte[] content = new byte[0];
 
                 try {
+                    if (urlString.contains("s3.amazonaws.com/MinecraftSkins/"))
+                        throw new FileNotFoundException("The skin server is offline.");
+
                     if (headerSize < requestBytes.length) {
                         content = Arrays.copyOfRange(requestBytes, headerSize, requestBytes.length);
 
@@ -228,7 +231,7 @@ public class ProxyThread implements Runnable {
                     clientSocket.getOutputStream().write(responseHeaders.getBytes());
                     clientSocket.getOutputStream().flush();
                     clientSocket.getOutputStream().close();
-                    ex.printStackTrace();
+//                    ex.printStackTrace();
                 }
             } catch (FileNotFoundException ex) {
                 System.err.println("Got a 404 for: " + ex.getMessage());
