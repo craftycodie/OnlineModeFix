@@ -186,7 +186,7 @@ public class MineOnlineBroadcastPlugin extends JavaPlugin {
             String discordToken = mineOnlineConfig.getConfigString("discord-token");
             String discordChannelID = mineOnlineConfig.getConfigString("discord-channel");
             String discordWebhookURL = mineOnlineConfig.getConfigString("discord-webhook-url");
-            String serverName = mineOnlineConfig.getConfigString("server-name");
+            String serverName = new MinecraftColorCodeProvider().removeColorCodes(mineOnlineConfig.getConfigString("server-name"));
 
 
             if (discordToken != null && discordChannelID != null) { // Create the discord bot if token and channel are present
