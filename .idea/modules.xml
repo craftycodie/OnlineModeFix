@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/MineOnlineBroadcast.iml" filepath="$PROJECT_DIR$/MineOnlineBroadcast.iml" />
+      <module fileurl="file://$PROJECT_DIR$/OnlineModeFix.iml" filepath="$PROJECT_DIR$/OnlineModeFix.iml" />
     </modules>
   </component>
 </project>

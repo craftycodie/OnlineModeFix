@@ -1,10 +1,10 @@
-name: MineOnlineBroadcast
-version: 1.1.6
-description: Lists a server on mineonline.codie.gg/servers
-author: codieradical
+name: OnlineModeFix
+version: 1.0.0
+description: Fixes online-mode authentication
+author: craftycodie
 authors: [Codie]
-website: https://mineonline.codie.gg/
+website: https://twitter.com/craftycodie
 
-main: gg.codie.mineonline.plugin.bukkit.MineOnlineBroadcastPlugin
+main: gg.codie.mineonline.plugin.bukkit.OnlineModeFixPlugin
 database: false
 depend: []
