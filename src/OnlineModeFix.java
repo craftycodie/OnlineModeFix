@@ -1,18 +1,20 @@
 import gg.codie.mineonline.protocol.MineOnlineURLStreamHandlerFactory;
 
-import java.io.*;
 import java.net.URL;
-import java.util.Properties;
 import java.util.logging.Logger;
 
 public class OnlineModeFix extends Plugin {
     private static String NAME = "OnlineModeFix";
-    Logger log;
+
+    static boolean enabled;
 
     public void enableOnlineMode() {
-        this.log = Logger.getLogger("Minecraft");
+        if (enabled)
+            return;
+        else
+            enabled = true;
 
-        log.info("Enabling online-mode fix.");
+        Logger.getLogger("Minecraft").info("Enabling online-mode fix.");
 
         URL.setURLStreamHandlerFactory(new MineOnlineURLStreamHandlerFactory());
     }
