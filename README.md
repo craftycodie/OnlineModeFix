@@ -10,7 +10,7 @@ A Bukkit, hMod and Vanilla plugin to fix online-mode for old Minecraft servers.
 2. Add the plugin to the plugins list in server.properties (ex. plugins=OnlineModeFix).
 3. Set online-mode to true in the server.properties file.
 
-## Vanilla
+## Vanilla (or any other modded servers)
 1. Move the jar next to your server jar.
 2. Launch the server using this command:
 
