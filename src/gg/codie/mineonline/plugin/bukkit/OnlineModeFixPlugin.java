@@ -1,35 +1,22 @@
 package gg.codie.mineonline.plugin.bukkit;
 
-import gg.codie.mineonline.plugin.ProxyThread;
+import gg.codie.mineonline.protocol.MineOnlineURLStreamHandler;
+import gg.codie.mineonline.protocol.MineOnlineURLStreamHandlerFactory;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
-import java.net.ServerSocket;
+import java.net.URL;
 import java.util.Properties;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class OnlineModeFixPlugin extends JavaPlugin {
-    Thread broadcastThread;
     Logger log;
-    ProxyThread proxyThread;
 
-    public void launchProxy() throws IOException {
-        ServerSocket serverSocket = new ServerSocket(0);
-        proxyThread = new ProxyThread(serverSocket);
-        proxyThread.start();
+    public void enableOnlineModeFix() {
+        Logger.getLogger("Minecraft").log(Level.INFO, "Enabling online-mode fix.");
 
-        System.out.println("Enabling online-mode fix.");
-
-        System.setProperty("http.proxyHost", serverSocket.getInetAddress().getHostAddress());
-        System.setProperty("http.proxyPort", "" + serverSocket.getLocalPort());
-        System.setProperty("http.nonProxyHosts", "localhost|127.0.0.1");
-    }
-
-    public void stopProxy() {
-        if (proxyThread != null) {
-            proxyThread.stop();
-            proxyThread = null;
-        }
+        URL.setURLStreamHandlerFactory(new MineOnlineURLStreamHandlerFactory());
     }
 
     @Override
@@ -38,24 +25,11 @@ public class OnlineModeFixPlugin extends JavaPlugin {
     }
 
     public void initialize() {
-        this.log = Logger.getLogger("Minecraft");
-
-        Properties propertiesFile = new Properties();
-
-        try {
-            propertiesFile.load(new FileInputStream(new File("server.properties")));
-            boolean onlineMode = propertiesFile.getProperty("online-mode", "true").equals("true");
-
-            if (onlineMode)
-                launchProxy();
-        } catch (Exception ex) {
-            log.warning("Failed to enable online-mode fix. Authentication may fail.");
-        }
+        enableOnlineModeFix();
     }
 
     @Override
     public void onDisable() {
-        broadcastThread.interrupt();
-        stopProxy();
+
     }
 }
