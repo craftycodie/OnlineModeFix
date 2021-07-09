@@ -1,12 +1,9 @@
 package gg.codie.mineonline.plugin.bukkit;
 
-import gg.codie.mineonline.protocol.MineOnlineURLStreamHandler;
 import gg.codie.mineonline.protocol.MineOnlineURLStreamHandlerFactory;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.*;
 import java.net.URL;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
