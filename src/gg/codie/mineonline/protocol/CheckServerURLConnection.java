@@ -27,6 +27,11 @@ public class CheckServerURLConnection extends HttpURLConnection {
 
     @Override
     public void connect() throws IOException {
+
+    }
+
+    @Override
+    public InputStream getInputStream() throws IOException {
         String username = null;
         String serverId = null;
         String ip = null;
@@ -45,19 +50,14 @@ public class CheckServerURLConnection extends HttpURLConnection {
                 ip = keyValue[1];
         }
 
-        if (username == null || serverId == null) {
-            return;
+        if (username != null && serverId != null) {
+            boolean validJoin = SessionServer.hasJoined(username, serverId, ip);
+
+            if (validJoin) {
+                response = "YES";
+            }
         }
 
-        boolean validJoin = SessionServer.hasJoined(username, serverId, ip);
-
-        if (validJoin) {
-            response = "YES";
-        }
-    }
-
-    @Override
-    public InputStream getInputStream() throws IOException {
         return new ByteArrayInputStream(response.getBytes());
     }
 
