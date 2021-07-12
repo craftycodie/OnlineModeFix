@@ -1,6 +1,8 @@
 # OnlineModeFix
 A Bukkit, hMod and Vanilla plugin to fix online-mode for old Minecraft servers.
 
+[Download](https://github.com/craftycodie/OnlineModeFix/releases/latest/download/OnlineModeFix.jar)
+
 ## Bukkit
 1. Move the jar into your server's plugin folder.
 2. Set online-mode to true in the server.properties file.
