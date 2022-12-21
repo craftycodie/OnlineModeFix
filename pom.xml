@@ -26,13 +26,6 @@
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
-  <repositories>
-    <repository>
-      <id>local-maven-repo</id>
-      <url>file:///${project.basedir}/src/main/resources/libraries/</url>
-    </repository>
-  </repositories>
-
   <dependencies>
     <dependency>
       <groupId>com</groupId>
@@ -53,6 +46,7 @@
 
   <build>
     <finalName>${project.artifactId}</finalName>
+    <sourceDirectory>src</sourceDirectory>
     <resources>
       <resource>
         <directory>res</directory>
