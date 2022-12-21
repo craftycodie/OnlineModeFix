@@ -1,5 +1,5 @@
 name: OnlineModeFix
-version: 1.1.4
+version: ${project.version}
 description: Fixes online-mode authentication.
 author: craftycodie
 authors: [Codie]
