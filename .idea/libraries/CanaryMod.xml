@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="json">
+  <library name="CanaryMod">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/json.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/CanaryMod.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
