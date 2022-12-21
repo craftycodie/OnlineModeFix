@@ -10,7 +10,6 @@ before_build:
   - mvn -v
 build_script:
   - mvn clean package -DskipTests
-  - mvn package -P debug
 test_script:
   - mvn install verify
 test: off
