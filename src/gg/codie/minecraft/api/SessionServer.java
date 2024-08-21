@@ -5,7 +5,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class SessionServer {
-    private static final String BASE_URL = "https://sessionserver.mojang.com";
+    private static final String BASE_URL = System.getProperty("minecraft.api.session.host", "https://sessionserver.mojang.com");
 
     public static boolean hasJoined(String username, String serverId, String ip) throws IOException {
         HttpURLConnection connection;
