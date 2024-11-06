@@ -29,7 +29,7 @@ jobs:
           mkdir staging && cp target/*.jar staging
 
       - name: Step 4 - Set up a cache for Maven
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
@@ -38,5 +38,5 @@ jobs:
       - name: Step 5 - Persist workflow data as artificats
         uses: actions/upload-artifact@v4
         with:
-          name: github-actions-artifact
+          name: OnlineModeFix
           path: staging
